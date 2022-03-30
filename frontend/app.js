@@ -1,4 +1,4 @@
-const socket = io('ws://localhost:8080');
+const socket = io.connect("http://localhost:8099/message",{transports:['websocket','xhr-polling','jsonp-polling']});
 
 socket.on('connect', text => {
     console.log("onconnected");
@@ -23,7 +23,11 @@ socket.on('disconnect', text => {
 
 document.querySelector('button').onclick = () => {
     const text = document.querySelector('input').value;
-    socket.emit('message', text)
+    let data = {
+        username:"testusername",
+        message:text
+    }
+    socket.emit('message', data);
 }
 
 // Regular Websockets
