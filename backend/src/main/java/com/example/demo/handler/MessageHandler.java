@@ -7,7 +7,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
-import com.example.demo.model.Message;
+import com.example.demo.model.*;
 
 public class MessageHandler {
 
@@ -22,6 +22,8 @@ public class MessageHandler {
   public void onConnect(SocketIOClient client) {
     System.out.println("onConnect > "+ client.getNamespace().getName()+client.getSessionId().toString());
     SocketIONamespace namespace = client.getNamespace();
+    //以下得到header
+//    client.getHandshakeData().getHttpHeaders()
     namespace.getBroadcastOperations().sendEvent("connect", client.getRemoteAddress().toString());
   }
 
